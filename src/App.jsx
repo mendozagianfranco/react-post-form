@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
     author: '',
     title: '',
     body: '',
-    public: true
+    public: false
   });
 
   function handlePost(e) {
@@ -17,9 +18,20 @@ function App() {
     }));
   }
 
+  const endopoint = 'https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts';
+
+  function createPost(e) {
+    e.preventDefault();
+    axios.post(endopoint, postData)
+      .then(res => {
+        console.log(res);
+      });
+
+  }
+
   return (
     <>
-      <form>
+      <form onSubmit={createPost}>
         <div>
           <label htmlFor="author-element">Nome Autore</label>
           <input
