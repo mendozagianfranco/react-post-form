@@ -5,8 +5,17 @@ function App() {
     author: '',
     title: '',
     body: '',
-    public: false
+    public: true
   });
+
+  function handlePost(e) {
+    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+    setPostData(postData => ({
+      ...postData,
+      [e.target.name]: value
+    }));
+  }
 
   return (
     <>
@@ -19,6 +28,7 @@ function App() {
             id='author-element'
             placeholder='Inserire nome autore'
             value={postData.author}
+            onChange={handlePost}
           />
         </div>
         <div>
@@ -29,6 +39,7 @@ function App() {
             id='title-element'
             placeholder='Inserire Titolo post'
             value={postData.title}
+            onChange={handlePost}
           />
         </div>
         <div>
@@ -39,6 +50,7 @@ function App() {
             id='body-element'
             placeholder='Inserire contenuto post'
             value={postData.body}
+            onChange={handlePost}
           />
         </div>
         <div>
@@ -48,6 +60,7 @@ function App() {
             id='public-element'
             name='public'
             checked={postData.public}
+            onChange={handlePost}
           />
         </div>
         <button>Crea Post</button>
